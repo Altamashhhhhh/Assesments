@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const url = "http://localhost:8080";
+const url = "https://ems-onrf.onrender.com";
 
 export const fetchEvents = createAsyncThunk(
   "event/events",
@@ -16,8 +16,7 @@ export const fetchEvents = createAsyncThunk(
             Authorization: `Bearer ${token}`,
           },
         }
-      );
-      console.log(response.data);
+      ); 
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -37,8 +36,7 @@ export const createEventAction = createAsyncThunk(
             Authorization: `Bearer ${token}`,
           },
         }
-      );
-      console.log(response.data.event);
+      ); 
       return response.data.event;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || error.message);
