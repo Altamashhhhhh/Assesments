@@ -8,7 +8,7 @@ Welcome to **Event Management System** 🏆 – a **MERN Stack** project built w
 
 ## 🌍 **Live Demo**  
 🚀 **Check out the live project:**  
-🔗 [Event Management System](https://assesments-steel.vercel.app/login)  
+🔗 [Event Management System](https://assesments-steel.vercel.app)  
 
 ---
 
