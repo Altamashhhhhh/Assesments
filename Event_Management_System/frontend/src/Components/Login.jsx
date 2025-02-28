@@ -32,9 +32,7 @@ const Login = () => {
     if (status === "Completed") {
       setMessage("Login Successful");
       setLoginData({ email: "", password: "" });
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+      navigate("/");
     } else if (status === "Failed") {
       setMessage(error);
     }

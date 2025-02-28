@@ -1,9 +1,11 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { logout } from "../redux/slices/userSlice";
 
 const Navbar = () => {
   const { isLogged , role  } = useSelector((state) => state.user);
+  const dispatch = useDispatch()
   const links = useMemo(()=>{
     if(role === "admin"){
       return [
@@ -39,7 +41,7 @@ const Navbar = () => {
             {link.text}
           </NavLink>
         ))}
-        <button className="p-3 rounded-sm bg-red-400 text-white hover:bg-red-700">Log Out</button>
+        <button  onClick={()=>dispatch(logout())} className="p-3 rounded-sm bg-red-400 text-white hover:bg-red-700">Log Out</button>
       </div>
     </div>
   ) : null;

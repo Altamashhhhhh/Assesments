@@ -39,7 +39,7 @@ enrollRouter.post("/enroll-event", async (req, res) => {
   }
 });
 
-enrollRouter.get("/enrollments/:userId",  async (req, res) => {
+enrollRouter.get("/enrollments/:userId", async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -59,6 +59,26 @@ enrollRouter.get("/enrollments/:userId",  async (req, res) => {
       message: "An error occurred while fetching enrollments.",
       error: error.message,
     });
+  }
+});
+
+enrollRouter.get("/event/:eventId", async (req, res) => {
+  const { eventId } = req.params;
+  try {
+    const enrolled = await enrollmentModel
+      .find({ event: eventId })
+      .populate("user", "name email");
+    const users = enrolled.map((enroll) => enroll.user);
+
+    res.status(200).json({ success: true, users });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error fetching users list",
+        error: error.message,
+      });
   }
 });
 

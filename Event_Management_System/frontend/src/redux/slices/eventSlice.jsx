@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchEvents } from "../actions/eventAction";
+import { createEventAction, fetchEvents } from "../actions/eventAction";
 
 const initialState = {
   data: [],
   error: null,
   status: "idle",
+  pagination : {}
 };
+
 
 export const eventSlice = createSlice({
   name: "event",
@@ -18,9 +20,24 @@ export const eventSlice = createSlice({
       })
       .addCase(fetchEvents.fulfilled, (state, { payload }) => {
         state.status = "Completed";
-        (state.error = "null"), (state.data = payload);
+        state.error = null;
+        state.data = payload.events;
+        state.pagination = payload.pagination
       })
       .addCase(fetchEvents.rejected, (state, action) => {
+        state.status = "Failed";
+        state.error = action.payload || action.error.message;
+      })
+      .addCase(createEventAction.pending, (state) => {
+        state.status = "Loading";
+        state.error = null;
+      })
+      .addCase(createEventAction.fulfilled, (state, { payload }) => {
+        state.status = "Completed";
+        state.data.push(payload);
+        state.error = null;
+      })
+      .addCase(createEventAction.rejected, (state, action) => {
         state.status = "Failed";
         state.error = action.payload || action.error.message;
       });
