@@ -13,8 +13,8 @@ const Home = () => {
   }, [isLogged , navigate ]);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full bg-blue-100 h-screen">
-      <div className="flex flex-col items-center justify-center text-center w-3/4 md:w-1/2 lg:w-1/3 p-8 shadow-lg bg-white border border-gray-200 rounded-2xl text-gray-700">
+    <div className="flex flex-col justify-center items-center w-screen bg-blue-100 h-screen">
+      <div className="flex flex-col items-center justify-center text-center w-9/10 md:w-1/2 lg:w-1/3 p-8 shadow-lg bg-white border border-gray-200 rounded-2xl text-gray-700">
         <h1 className="font-bold text-5xl text-blue-700 mb-2">ONE STOP</h1>
         <h1 className="font-extrabold text-6xl text-gray-800 mb-3">EVENT PLANNER</h1>
         <p className="font-light text-lg text-gray-600 italic">
