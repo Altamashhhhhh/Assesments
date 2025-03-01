@@ -62,7 +62,7 @@ const Events = () => {
     if (!isLogged) {
       navigate("/login");
     }
-    dispatch(fetchEvents({ token, page }));
+    dispatch(fetchEvents({ token, page , search }));
   }, [isLogged, navigate, page , search]);
 
   useEffect(() => {
