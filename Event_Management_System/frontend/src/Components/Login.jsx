@@ -39,7 +39,7 @@ const Login = () => {
   }, [status, error, navigate]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex items-center justify-center min-h-screen  ">
       <form
         onSubmit={handleLoginSubmit}
         className=" flex justify-around items-center flex-col w-full h-100 max-w-md p-8 space-y-6 bg-white rounded-lg shadow-xl"

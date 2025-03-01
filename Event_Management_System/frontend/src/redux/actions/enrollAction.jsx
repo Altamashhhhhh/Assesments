@@ -56,3 +56,22 @@ export const fetchEnrolledUsersAction = createAsyncThunk(
     }
   }
 );
+
+
+export const unregisterEventAction = createAsyncThunk(
+  "/enrollment/delete" , 
+  async ({id , token} , {rejectWithValue}) => {
+    try{
+      const response = await axios.delete(`${url}/enroll/delete/${id}` , {
+        headers : {
+          "Authorization" : `Bearer ${token}`
+        }
+      })
+      console.log(response)
+      return response.data
+    }catch(error){
+      console.log(error)
+      return rejectWithValue(error.response.data.message || error.message )
+    }
+  } 
+)

@@ -72,11 +72,30 @@ enrollRouter.get("/event/:eventId", async (req, res) => {
 
     res.status(200).json({ success: true, users });
   } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching users list",
+      error: error.message,
+    });
+  }
+});
+
+enrollRouter.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const isExist = await enrollmentModel.findOne({_id : id})
+    if(!isExist){
+      return res.status(404).json({message : "enrollment not found , either Provided id is wrong or try again later  "})
+    }
+    const deleted = await enrollmentModel.findByIdAndDelete(id);
+    res
+      .status(200)
+      .json({ message: "Enrollment is delete successfull", data: deleted });
+  } catch (error) {
     return res
       .status(500)
       .json({
-        success: false,
-        message: "Error fetching users list",
+        message: "An error occured while delete the enrollment",
         error: error.message,
       });
   }

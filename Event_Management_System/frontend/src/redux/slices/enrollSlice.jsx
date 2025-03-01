@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { enrollEventAction, fetchEnrolledUsersAction, fetchEnrollmentsAction } from "../actions/enrollAction"
+import { enrollEventAction, fetchEnrolledUsersAction, fetchEnrollmentsAction, unregisterEventAction } from "../actions/enrollAction"
 
 const initialState = {
     data : []  , 
@@ -29,7 +29,7 @@ export const enrollSlice = createSlice({
         }).addCase(enrollEventAction.fulfilled , (state , {payload}) => {
             state.status = "Enrollment Completed" ; 
             state.error = null ; 
-            // state.data.push(payload)
+             
         }).addCase(enrollEventAction.rejected , (state , action ) => {
             state.status = "Enrollment Failed" ; 
             state.error = action.payload || action.error.message 
@@ -54,7 +54,15 @@ export const enrollSlice = createSlice({
         }).addCase(fetchEnrolledUsersAction.rejected , (state , action ) => {
             state.status = "Failed" ; 
             state.error = action.payload || action.error.message 
-        })
+        }).addCase(unregisterEventAction.pending , state => {
+            state.status = "Loading" ; 
+            state.error = null ; 
+        }).addCase(unregisterEventAction.fulfilled , (state , {payload}) => {
+            state.status = "Completed" ; 
+        }).addCase(unregisterEventAction.rejected ,(state , action) => {
+            state.status = "Failed" ; 
+            state.error = action.payload || action.error.message
+        }) 
     }
 })
 export const {resetError , resetStatus} = enrollSlice.actions
